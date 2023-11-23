@@ -9,13 +9,6 @@ class Window(tk.Toplevel):
         super().__init__(parent)
 
         # Définition de la taille de la fenêtre, du titre et des lignes/colonnes de l'affichage grid
-        display.defineGridDisplay(self, 2, 1)
-        ttk.Label(self, text="Modifier cette fonction en s'inspirant du code de F1, pour qu'elle affiche la liste des départements (code_departement, nom_departement) de la région Auvergne-Rhône-Alpes",
-                  wraplength=500, anchor="center", font=('Helvetica', '10', 'bold')).grid(sticky="we", row=0)
-
-        # ============================================================================================ #
-
-        # Définition de la taille de la fenêtre, du titre et des lignes/colonnes de l'affichage grid
         display.centerWindow(600, 400, self)
         self.title('Q1 : départements de la région Auvergne-Rhône-Alpes')
         display.defineGridDisplay(self, 2, 1)
