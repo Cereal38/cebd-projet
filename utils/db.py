@@ -1,5 +1,6 @@
 import sqlite3
 from sqlite3 import IntegrityError
+
 import pandas
 
 # Pointeur sur la base de données
@@ -90,6 +91,34 @@ def insertDB():
              "data/csv/Mesures.csv", ';',
              "insert into Mesures values ('{}','{}', {}, {}, {})",
              ['code_insee_departement', 'date_obs', 'tmin', 'tmax', 'tmoy']
+        )
+
+        # On ajoute les communes
+        read_csv_file(
+             "data/csv/Communes.csv", ';',
+             "insert into Communes values ({},'{}', '{}', {}, {}, {}, {}, {})",
+             ['Code Commune', 'Commune', 'Statut', 'Altitude Moyenne', 'Population', 'Superficie', 'Code Canton', 'Code Arrondissement']
+        )
+
+        # On ajoute les travaux d'isolation
+        read_csv_file(
+             "data/csv/Isolation.csv", ';',
+             "insert into Isolations (cout_total_ht_isolation, cout_induit_ht_isolation, annee_isolation, type_logement_isolation, annee_construction_logement_isolation, code_departement, poste_isolation, isolant_isolation, epaisseur_isolation, surface_isolation) values ({}, {}, {}, '{}', {}, '{}', '{}', '{}', {}, {})",
+             ['cout_total_ht', 'cout_induit_ht', 'annee_travaux', 'type_logement', 'annee_construction', 'code_departement', 'poste_isolation', 'isolant', 'epaisseur', 'surface']
+        )
+
+
+        # On ajoute les travaux de chauffage
+        read_csv_file(
+             "data/csv/Chauffage.csv", ';',
+             "insert into Chauffages (cout_total_ht_chauffage, cout_induit_ht_chauffage, annee_chauffage, type_logement_chauffage, annee_construction_logement_chauffage, code_departement, energie_avant_travaux_chauffage, energie_installee_chauffage, generateur_chauffage, type_chaudiere_chauffage) values ({}, {}, {}, '{}', {}, '{}', '{}', '{}', '{}', '{}')",
+             ['cout_total_ht', 'cout_induit_ht', 'annee_travaux', 'type_logement', 'annee_construction', 'code_departement', 'energie_chauffage_avt_travaux', 'energie_chauffage_installee', 'generateur', 'type_chaudiere']
+        )
+        
+        read_csv_file(
+             "data/csv/Photovoltaique.csv", ';',
+             "insert into Photovoltaiques (cout_total_ht_photovoltaique, cout_induit_ht_photovoltaique, annee_photovoltaique, type_logement_photovoltaique, annee_construction_logement_photovoltaique, code_departement, puissance_installee_photovoltaique, types_panneaux_photovoltaique) values ({}, {}, {}, '{}', {}, '{}', {}, '{}')",
+             ['cout_total_ht', 'cout_induit_ht', 'annee_travaux', 'type_logement', 'annee_construction', 'code_departement', 'puissance_installee', 'types_panneaux']
         )
 
     except Exception as e:

@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 
 from utils import display
 
@@ -19,13 +18,11 @@ class Window(tk.Toplevel):
                         SELECT code_departement, AVG(temperature_moy_mesure) AS temperature_moy_mesure
                         FROM Mesures
                         GROUP BY code_departement
-                    ), TempMin AS (
-                        SELECT nom_region, nom_departement, ROUND(MIN(temperature_moy_mesure), 2) AS temperature_moy_min
-                        FROM TempMoy JOIN Departements USING (code_departement) JOIN Regions USING (code_region) 
-                        GROUP BY nom_region
                     )
-                    SELECT * FROM TempMin"""
-        print(type(query))
+                    SELECT nom_region, nom_departement, ROUND(MIN(temperature_moy_mesure), 2) AS temperature_moy_min
+                    FROM TempMoy JOIN Departements USING (code_departement) JOIN Regions USING (code_region) 
+                    GROUP BY nom_region
+                    """
         # On utilise la fonction createTreeViewDisplayQuery pour afficher les résultats de la requête
         tree = display.createTreeViewDisplayQuery(self, columns, query,200)
         tree.grid(row=0, sticky="nswe")
