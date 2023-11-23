@@ -25,6 +25,7 @@ class Window(tk.Toplevel):
                         GROUP BY nom_region
                     )
                     SELECT * FROM TempMin"""
+        print(type(query))
         # On utilise la fonction createTreeViewDisplayQuery pour afficher les résultats de la requête
         tree = display.createTreeViewDisplayQuery(self, columns, query,200)
         tree.grid(row=0, sticky="nswe")
