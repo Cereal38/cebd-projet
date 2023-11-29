@@ -59,11 +59,11 @@ create table Isolations (
     poste_isolation TEXT,
     isolant_isolation TEXT,
     epaisseur_isolation INTEGER,
-    surface_isolation FLOAT,
-    CONSTRAINT fk_isolation_code_departement FOREIGN KEY (code_departement) REFERENCES Departements(code_departement),
-    CONSTRAINT ck_poste_isolation CHECK (poste_isolation IN ('COMBLES PERDUES', 'ITI', 'ITE', 'RAMPANTS', 'SARKING', 'TOITURE TERRASSE', 'PLANCHER BAS')),
-    CONSTRAINT ck_isolant_isolation CHECK (isolant_isolation IN ('AUTRES', 'LAINE VEGETALE', 'LAINE MINERALE', 'PLASTIQUES')),
-    CONSTRAINT ck_travaux_prix_positif CHECK (cout_total_ht_isolation > 0 AND cout_induit_ht_isolation > 0)
+    surface_isolation FLOAT--,
+    CONSTRAINT fk_isolation_code_departement FOREIGN KEY (code_departement) REFERENCES Departements(code_departement)--,
+--    CONSTRAINT ck_poste_isolation CHECK (poste_isolation IN ('COMBLES PERDUES', 'ITI', 'ITE', 'RAMPANTS', 'SARKING', 'TOITURE TERRASSE', 'PLANCHER BAS')),
+--    CONSTRAINT ck_isolant_isolation CHECK (isolant_isolation IN ('AUTRES', 'LAINE VEGETALE', 'LAINE MINERALE', 'PLASTIQUES')),
+--    CONSTRAINT ck_travaux_prix_positif CHECK (cout_total_ht_isolation > 0 AND cout_induit_ht_isolation > 0)
 );
 
 create table Chauffages (
@@ -77,13 +77,13 @@ create table Chauffages (
     energie_avant_travaux_chauffage TEXT,
     energie_installee_chauffage TEXT,
     generateur_chauffage TEXT,
-    type_chaudiere_chauffage TEXT,
-    CONSTRAINT fk_chauffage_code_departement FOREIGN KEY (code_departement) REFERENCES Departements(code_departement),
-    CONSTRAINT ck_energie_avant_travaux_chauffage CHECK (energie_avant_travaux_chauffage IN ('AUTRES', 'BOIS', 'ELECTRICITE', 'FIOUL', 'GAZ')),
-    CONSTRAINT ck_energie_installee_chauffage CHECK (energie_installee_chauffage IN ('AUTRES', 'BOIS', 'ELECTRICITE', 'FIOUL', 'GAZ')),
-    CONSTRAINT ck_generateur_chauffage CHECK (generateur_chauffage IN ('AUTRES', 'CHAUDIERE', 'INSERT', 'POELE', 'PAC', 'RADIATEUR')),
-    CONSTRAINT ck_type_chaudiere_chauffage CHECK (type_chaudiere_chauffage IN ('STANDARD', 'AIR-EAU', 'A CONDENSATION', 'AUTRES', 'AIR-AIR', 'GEOTHERMIE', 'HPE')),
-    CONSTRAINT ck_travaux_prix_positif CHECK (cout_total_ht_chauffage > 0 AND cout_induit_ht_chauffage > 0)
+    type_chaudiere_chauffage TEXT--,
+--    CONSTRAINT fk_chauffage_code_departement FOREIGN KEY (code_departement) REFERENCES Departements(code_departement)--,
+--    CONSTRAINT ck_energie_avant_travaux_chauffage CHECK (energie_avant_travaux_chauffage IN ('AUTRES', 'BOIS', 'ELECTRICITE', 'FIOUL', 'GAZ')),
+--    CONSTRAINT ck_energie_installee_chauffage CHECK (energie_installee_chauffage IN ('AUTRES', 'BOIS', 'ELECTRICITE', 'FIOUL', 'GAZ')),
+--    CONSTRAINT ck_generateur_chauffage CHECK (generateur_chauffage IN ('AUTRES', 'CHAUDIERE', 'INSERT', 'POELE', 'PAC', 'RADIATEUR')),
+--    CONSTRAINT ck_type_chaudiere_chauffage CHECK (type_chaudiere_chauffage IN ('STANDARD', 'AIR-EAU', 'A CONDENSATION', 'AUTRES', 'AIR-AIR', 'GEOTHERMIE', 'HPE')),
+--    CONSTRAINT ck_travaux_prix_positif CHECK (cout_total_ht_chauffage > 0 AND cout_induit_ht_chauffage > 0)
 );
 
 create table Photovoltaiques (
@@ -95,9 +95,9 @@ create table Photovoltaiques (
     annee_construction_logement_photovoltaique  INTEGER,
     code_departement TEXT,
     puissance_installee_photovoltaique INTEGER,
-    types_panneaux_photovoltaique TEXT,
-    CONSTRAINT fk_photovoltaique_code_departement FOREIGN KEY (code_departement) REFERENCES Departements(code_departement),
-    CONSTRAINT ck_types_panneaux_photovoltaique CHECK (types_panneaux_photovoltaique IN ('MONOCRISTALLIN', 'POLYCRISTALLIN')),
-    CONSTRAINT ck_travaux_prix_positif CHECK (cout_total_ht_photovoltaique > 0 AND cout_induit_ht_photovoltaique > 0)
+    types_panneaux_photovoltaique TEXT--,
+--    CONSTRAINT fk_photovoltaique_code_departement FOREIGN KEY (code_departement) REFERENCES Departements(code_departement),
+--    CONSTRAINT ck_types_panneaux_photovoltaique CHECK (types_panneaux_photovoltaique IN ('MONOCRISTALLIN', 'POLYCRISTALLIN')),
+--    CONSTRAINT ck_travaux_prix_positif CHECK (cout_total_ht_photovoltaique > 0 AND cout_induit_ht_photovoltaique > 0)
 );
 --TODO Q4 Ajouter les créations des nouvelles tables
