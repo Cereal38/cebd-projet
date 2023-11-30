@@ -15,12 +15,13 @@ def updateDBfile(data:sqlite3.Connection, file):
     createFile = open(file, 'r')
     createSql = createFile.read()
     createFile.close()
-    sqlQueries = createSql.split(";")
+#    sqlQueries = createSql.split(";")
 
     # Exécution de toutes les requêtes du tableau
     cursor = data.cursor()
-    for query in sqlQueries:
-        cursor.execute(query)
+    # for query in sqlQueries:
+    #     cursor.execute(query)
+    cursor.executescript(createSql)
 
 # Action en cas de clic sur le bouton de création de base de données
 def createDB():
@@ -141,7 +142,7 @@ def read_csv_file(csvFile, separator, query, columns):
     # Lecture du fichier CSV csvFile avec le séparateur separator
     # pour chaque ligne, exécution de query en la formatant avec les colonnes columns
     df = pandas.read_csv(csvFile, sep=separator)
-    df = df.where(pandas.notnull(df), 'null')
+    df = df.where(pandas.notnull(df), None)
 
     cursor = data.cursor()
     for ix, row in df.iterrows():
@@ -157,7 +158,7 @@ def read_csv_file(csvFile, separator, query, columns):
             cursor.execute(query, tuple(tab))
 
             # On affiche la requête pour comprendre la construction ou débugger !
-            #print(formatedQuery)
+            # print(formatedQuery)
 
             #cursor.execute(formatedQuery)
         except IntegrityError as err:

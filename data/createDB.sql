@@ -1,5 +1,5 @@
 
-create table Departements (
+CREATE TABLE Departements (
     code_departement TEXT,
     nom_departement TEXT,
     code_region INTEGER,
@@ -8,13 +8,13 @@ create table Departements (
     constraint fk_region foreign key (code_region) references Regions(code_region)
 );
 
-create table Regions (
+CREATE TABLE Regions (
     code_region INTEGER,
     nom_region TEXT,
     constraint pk_regions primary key (code_region)
 );
 
-create table Mesures (
+CREATE TABLE Mesures (
     code_departement TEXT,
     date_mesure DATE,
     temperature_min_mesure FLOAT,
@@ -24,7 +24,7 @@ create table Mesures (
     constraint fk_mesures foreign key (code_departement) references Departements(code_departement)
 );
 
-create table Communes (
+CREATE TABLE Communes (
     code_commune INTEGER PRIMARY KEY,
     nom_commune TEXT,
     status_commune TEXT,
@@ -34,7 +34,7 @@ create table Communes (
     code_canton_commune INTEGER,
     code_arrondissement_commune INTEGER
 );
--- create table Travaux (
+-- CREATE TABLE Travaux (
 --     id_travaux INTEGER PRIMARY KEY AUTOINCREMENT,
 --     cout_total_ht FLOAT,
 --     cout_induit_ht FLOAT,
@@ -48,7 +48,7 @@ create table Communes (
 
 -- On a choisit de faire l'héritage avec la stratégie de la duplication.
 -- Cela afin d'éviter de nombreux JOIN inutiles et pour simplifier la récupération des données depuis les CSV.
-create table Isolations (
+CREATE TABLE Isolations (
     id_isolation INTEGER PRIMARY KEY AUTOINCREMENT,
     cout_total_ht_isolation FLOAT,
     cout_induit_ht_isolation FLOAT,
@@ -59,14 +59,14 @@ create table Isolations (
     poste_isolation TEXT,
     isolant_isolation TEXT,
     epaisseur_isolation INTEGER,
-    surface_isolation FLOAT--,
+    surface_isolation FLOAT,
     CONSTRAINT fk_isolation_code_departement FOREIGN KEY (code_departement) REFERENCES Departements(code_departement)--,
 --    CONSTRAINT ck_poste_isolation CHECK (poste_isolation IN ('COMBLES PERDUES', 'ITI', 'ITE', 'RAMPANTS', 'SARKING', 'TOITURE TERRASSE', 'PLANCHER BAS')),
 --    CONSTRAINT ck_isolant_isolation CHECK (isolant_isolation IN ('AUTRES', 'LAINE VEGETALE', 'LAINE MINERALE', 'PLASTIQUES')),
 --    CONSTRAINT ck_travaux_prix_positif CHECK (cout_total_ht_isolation > 0 AND cout_induit_ht_isolation > 0)
 );
 
-create table Chauffages (
+CREATE TABLE Chauffages (
     id_chauffage INTEGER PRIMARY KEY AUTOINCREMENT,
     cout_total_ht_chauffage FLOAT,
     cout_induit_ht_chauffage FLOAT,
@@ -86,7 +86,7 @@ create table Chauffages (
 --    CONSTRAINT ck_travaux_prix_positif CHECK (cout_total_ht_chauffage > 0 AND cout_induit_ht_chauffage > 0)
 );
 
-create table Photovoltaiques (
+CREATE TABLE Photovoltaiques (
     id_photovoltaique INTEGER PRIMARY KEY AUTOINCREMENT,
     cout_total_ht_photovoltaique  FLOAT,
     cout_induit_ht_photovoltaique  FLOAT,
@@ -96,7 +96,7 @@ create table Photovoltaiques (
     code_departement TEXT,
     puissance_installee_photovoltaique INTEGER,
     types_panneaux_photovoltaique TEXT--,
---    CONSTRAINT fk_photovoltaique_code_departement FOREIGN KEY (code_departement) REFERENCES Departements(code_departement),
+--    CONSTRAINT fk_photovoltaique_code_departement FOREIGN KEY (code_departement) REFERENCES Departements(code_departement)--,
 --    CONSTRAINT ck_types_panneaux_photovoltaique CHECK (types_panneaux_photovoltaique IN ('MONOCRISTALLIN', 'POLYCRISTALLIN')),
 --    CONSTRAINT ck_travaux_prix_positif CHECK (cout_total_ht_photovoltaique > 0 AND cout_induit_ht_photovoltaique > 0)
 );
