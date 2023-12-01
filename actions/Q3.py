@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-from utils import display
-from utils import db
+
+from utils import db, display
+
 
 class Window(tk.Toplevel):
 
@@ -24,7 +25,10 @@ class Window(tk.Toplevel):
         # Affichage du label, de la case de saisie et du bouton valider
         ttk.Label(self, text='Veuillez indiquer une région :', anchor="center", font=('Helvetica', '10', 'bold')).grid(row=1, column=0)
         #TODO Q3 C'est cette partie que l'on souhaite changer pour un choix dynamique de la région
-        self.input = ttk.Entry(self)
+        # self.input = ttk.Entry(self)
+        # On utilise un menu déroulant pour proposer un choix de la région
+        self.input = ttk.Combobox(self, values=[row[0] for row in db.data.cursor().execute("SELECT DISTINCT nom_region FROM Regions ORDER BY nom_region")])
+
         self.input.grid(row=1, column=1)
         self.input.bind('<Return>', self.searchRegion) # On bind l'appui de la touche entrée sur la case de saisie, on peut donc utiliser soit la touche entrée soit le bouton valider
         ttk.Button(self, text='Valider', command=self.searchRegion).grid(row=1, column=2)

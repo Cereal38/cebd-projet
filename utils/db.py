@@ -1,5 +1,6 @@
 import sqlite3
 from sqlite3 import IntegrityError
+
 import pandas
 
 # Pointeur sur la base de données
@@ -14,12 +15,13 @@ def updateDBfile(data:sqlite3.Connection, file):
     createFile = open(file, 'r')
     createSql = createFile.read()
     createFile.close()
-    sqlQueries = createSql.split(";")
+#    sqlQueries = createSql.split(";")
 
     # Exécution de toutes les requêtes du tableau
     cursor = data.cursor()
-    for query in sqlQueries:
-        cursor.execute(query)
+    # for query in sqlQueries:
+    #     cursor.execute(query)
+    cursor.executescript(createSql)
 
 # Action en cas de clic sur le bouton de création de base de données
 def createDB():
@@ -45,42 +47,42 @@ def insertDB():
         # On ajoute les anciennes régions
         read_csv_file(
             "data/csv/Communes.csv", ';',
-            "insert into Regions values ({},'{}')",
+            "insert into Regions values (?,?)",
             ['Code Région', 'Région']
         )
 
         # On ajoute les nouvelles régions
         read_csv_file(
             "data/csv/AnciennesNouvellesRegions.csv", ';',
-            "insert into Regions values ({},'{}')",
+            "insert into Regions values (?,?)",
             ['Nouveau Code', 'Nom Officiel Région Majuscule']
         )
 
         # On ajoute les départements référencés avec les anciennes régions
         read_csv_file(
             "data/csv/Communes.csv", ';',
-            "insert into Departements values ('{}','{}', {},'')",
+            "insert into Departements values (?,?, ?,'')",
             ['Code Département', 'Département', 'Code Région']
         )
 
         # On renseigne la zone climatique des départements
         read_csv_file(
             "data/csv/ZonesClimatiques.csv", ';',
-            "update Departements set zone_climatique = '{}' where code_departement = '{}'",
+            "update Departements set zone_climatique = ? where code_departement = ?",
             ['zone_climatique', 'code_departement']
         )
 
         # On modifie les codes région des départements pour les codes des nouvelles régions
         read_csv_file(
             "data/csv/AnciennesNouvellesRegions.csv", ';',
-            "update Departements set code_region = {} where code_region = {}",
+            "update Departements set code_region = ? where code_region = ?",
             ['Nouveau Code', 'Anciens Code']
         )
 
         # On supprime les anciennes régions, sauf si l'ancien code et le nouveau sont identiques (pour ne pas perdre les régions qui n'ont pas changé de code)
         read_csv_file(
             "data/csv/AnciennesNouvellesRegions.csv", ';',
-            "delete from Regions where code_region = {} and {} <> {}",
+            "delete from Regions where code_region = ? and ? <> ?",
             ['Anciens Code', 'Anciens Code', 'Nouveau Code']
         )
         print("Les erreurs UNIQUE constraint sont normales car on insère une seule fois les Regions et les Départemments")
@@ -88,8 +90,36 @@ def insertDB():
         # On ajoute les mesures
         read_csv_file(
              "data/csv/Mesures.csv", ';',
-             "insert into Mesures values ('{}','{}', {}, {}, {})",
+             "insert into Mesures values (?,?, ?, ?, ?)",
              ['code_insee_departement', 'date_obs', 'tmin', 'tmax', 'tmoy']
+        )
+
+        # On ajoute les communes
+        read_csv_file(
+             "data/csv/Communes.csv", ';',
+             "insert into Communes values (?,?, ?, ?, ?, ?, ?, ?)",
+             ['Code Commune', 'Commune', 'Statut', 'Altitude Moyenne', 'Population', 'Superficie', 'Code Canton', 'Code Arrondissement']
+        )
+
+        # On ajoute les travaux d'isolation
+        read_csv_file(
+             "data/csv/Isolation.csv", ';',
+             "insert into Isolations (cout_total_ht_isolation, cout_induit_ht_isolation, annee_isolation, type_logement_isolation, annee_construction_logement_isolation, code_departement, poste_isolation, isolant_isolation, epaisseur_isolation, surface_isolation) values (?, ?,?, ?, ?, ?, ?, ?, ?, ?)",
+             ['cout_total_ht', 'cout_induit_ht', 'annee_travaux', 'type_logement', 'annee_construction', 'code_departement', 'poste_isolation', 'isolant', 'epaisseur', 'surface']
+        )
+
+
+        # On ajoute les travaux de chauffage
+        read_csv_file(
+             "data/csv/Chauffage.csv", ';',
+             "insert into Chauffages (cout_total_ht_chauffage, cout_induit_ht_chauffage, annee_chauffage, type_logement_chauffage, annee_construction_logement_chauffage, code_departement, energie_avant_travaux_chauffage, energie_installee_chauffage, generateur_chauffage, type_chaudiere_chauffage) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+             ['cout_total_ht', 'cout_induit_ht', 'annee_travaux', 'type_logement', 'annee_construction', 'code_departement', 'energie_chauffage_avt_travaux', 'energie_chauffage_installee', 'generateur', 'type_chaudiere']
+        )
+        
+        read_csv_file(
+             "data/csv/Photovoltaique.csv", ';',
+             "insert into Photovoltaiques (cout_total_ht_photovoltaique, cout_induit_ht_photovoltaique, annee_photovoltaique, type_logement_photovoltaique, annee_construction_logement_photovoltaique, code_departement, puissance_installee_photovoltaique, types_panneaux_photovoltaique) values (?, ?, ?, ?, ?, ?, ?, ?)",
+             ['cout_total_ht', 'cout_induit_ht', 'annee_travaux', 'type_logement', 'annee_construction', 'code_departement', 'puissance_installee', 'type_panneaux']
         )
 
     except Exception as e:
@@ -112,7 +142,7 @@ def read_csv_file(csvFile, separator, query, columns):
     # Lecture du fichier CSV csvFile avec le séparateur separator
     # pour chaque ligne, exécution de query en la formatant avec les colonnes columns
     df = pandas.read_csv(csvFile, sep=separator)
-    df = df.where(pandas.notnull(df), 'null')
+    df = df.where(pandas.notnull(df), None)
 
     cursor = data.cursor()
     for ix, row in df.iterrows():
@@ -124,12 +154,13 @@ def read_csv_file(csvFile, separator, query, columns):
                     row[columns[i]] = row[columns[i]].replace("'","''")
                 tab.append(row[columns[i]])
 
-            formatedQuery = query.format(*tab)
+            # Utilisation de tuple pour utiliser la méthode d'insertion VALUE (?, ?, ...,?)
+            cursor.execute(query, tuple(tab))
 
             # On affiche la requête pour comprendre la construction ou débugger !
-            #print(formatedQuery)
+            # print(formatedQuery)
 
-            cursor.execute(formatedQuery)
+            #cursor.execute(formatedQuery)
         except IntegrityError as err:
             print(err)
 
