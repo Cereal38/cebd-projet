@@ -114,7 +114,7 @@ class Window(tk.Toplevel):
         energie_avant_travaux_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='energie avant travaux').grid(row=6, column=0, sticky="e")
         energie_installee_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='energie installee').grid(row=7, column=0, sticky="e")
         generateur_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='generateur chauffage').grid(row=8, column=0, sticky="e")
-        type_chaudiere_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='type chaudiere').grid(row=9, columnspan=2)
+        type_chaudiere_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='type chaudiere').grid(row=9, column=0, sticky="e")
         cout_total_ht_Chauffage = tk.StringVar()
         cout_induit_ht_Chauffage = tk.StringVar()
         annee_Chauffage = tk.StringVar()
@@ -232,82 +232,92 @@ class Window(tk.Toplevel):
         ttk.Button(tabIsolation2, text='Modifier', command=lambda: self.ModifierIsolation(Isolation_Modif, Id_Isolation_Modif_text.get())).grid(row=12, column=1, sticky="w")
 
         Chauffage_Modif = []
-        cout_total_ht_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='cout total ht').grid(row=0, column= 0, sticky="e")
-        cout_induit_ht_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='cout induit ht').grid(row=1, column= 0, sticky="e")
-        annee_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='annee chauffage').grid(row=2, column= 0, sticky="e")
-        type_logement_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='type logement').grid(row=3, column=0, sticky="e")
-        annee_construction_logement_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='annee construction logement').grid(row=4, column=0, sticky="e")
-        code_departement_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='code departement').grid(row=5, column=0, sticky="e")
-        energie_avant_travaux_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='energie avant travaux').grid(row=6, column=0, sticky="e")
-        energie_installee_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='energie installee').grid(row=7, column=0, sticky="e")
-        generateur_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='generateur chauffage').grid(row=8, column=0, sticky="e")
-        type_chaudiere_Chauffage_Ajout1 = ttk.Label(tabChauffage1, text='type chaudiere').grid(row=9, columnspan=2)
-        cout_total_ht_Chauffage = tk.StringVar()
-        cout_induit_ht_Chauffage = tk.StringVar()
-        annee_Chauffage = tk.StringVar()
-        type_logement_Chauffage = tk.StringVar()
-        annee_construction_logement_Chauffage = tk.StringVar()
-        code_departement_Chauffage = tk.StringVar()
-        energie_avant_travaux_Chauffage = tk.StringVar()
-        energie_installee_Chauffage = tk.StringVar()
-        generateur_Chauffage = tk.StringVar()
-        type_chaudiere_Chauffage = tk.StringVar()
-        cout_total_ht_Chauffage_Ajout2 = ttk.Entry(tabChauffage1, textvariable=cout_total_ht_Chauffage).grid(row=0, column= 1, sticky="w")
-        cout_induit_ht_Chauffage_Ajout2 = ttk.Entry(tabChauffage1, textvariable=cout_induit_ht_Chauffage).grid(row=1, column= 1, sticky="w")
-        annee_Chauffage_Ajout2 = ttk.Entry(tabChauffage1, textvariable=annee_Chauffage).grid(row=2, column= 1, sticky="w")
-        type_logement_Chauffage_Ajout2 = ttk.Entry(tabChauffage1, textvariable=type_logement_Chauffage).grid(row=3, column= 1, sticky="w")
-        annee_construction_logement_Chauffage_Ajout2 = ttk.Entry(tabChauffage1, textvariable=annee_construction_logement_Chauffage).grid(row=4, column= 1, sticky="w")
-        code_departement_Chauffage_Ajout2 = ttk.Entry(tabChauffage1, textvariable=code_departement_Chauffage).grid(row=5, column= 1, sticky="w")
-        energie_avant_travaux_Chauffage_Ajout2 = ttk.Entry(tabChauffage1, textvariable=energie_avant_travaux_Chauffage).grid(row=6, column= 1, sticky="w")
-        energie_installee_Chauffage_Ajout2 = ttk.Entry(tabChauffage1, textvariable=energie_installee_Chauffage).grid(row=7, column= 1, sticky="w")
-        generateur_Chauffage_Ajout2 = ttk.Entry(tabChauffage1, textvariable=generateur_Chauffage).grid(row=8, column= 1, sticky="w")
-        type_chaudiere_Chauffage_Ajout2 = ttk.Entry(tabChauffage1, textvariable=type_chaudiere_Chauffage).grid(row=9, column= 1, sticky="w")
-        Chauffage.append(cout_total_ht_Chauffage)
-        Chauffage.append(cout_induit_ht_Chauffage)
-        Chauffage.append(annee_Chauffage)
-        Chauffage.append(type_logement_Chauffage)
-        Chauffage.append(annee_construction_logement_Chauffage)
-        Chauffage.append(code_departement_Chauffage)
-        Chauffage.append(energie_avant_travaux_Chauffage)
-        Chauffage.append(energie_installee_Chauffage)
-        Chauffage.append(generateur_Chauffage)
-        Chauffage.append(type_chaudiere_Chauffage)
-        ttk.Button(tabChauffage1, text='Ajouter', command=lambda: self.AjouterChauffage(Chauffage)).grid(row=10, columnspan=2)
+        Id_Chauffage_Modif_label = ttk.Label(tabChauffage2, text='Id Chauffage:').grid(row=0, column= 0, sticky="e")
+        Id_Chauffage_Modif_text = tk.StringVar()
+        Id_Chauffage_Modif = ttk.Combobox(tabChauffage2, textvariable=Id_Chauffage_Modif_text,values=[row[0] for row in db.data.cursor().execute("SELECT id_Chauffage FROM Chauffages ORDER BY id_chauffage")]).grid(row=0, column=1, sticky="w")
 
-        Photovoltaique = []
-        cout_total_ht_Photovoltaique_Ajout1 = ttk.Label(tabPhotovoltaique1, text='cout total ht').grid(row=0, column= 0, sticky="e")
-        cout_induit_ht_Photovoltaique_Ajout1 = ttk.Label(tabPhotovoltaique1, text='cout induit ht').grid(row=1, column= 0, sticky="e")
-        annee_Photovoltaique_Ajout1 = ttk.Label(tabPhotovoltaique1, text='annee photovoltaique').grid(row=2, column= 0, sticky="e")
-        type_logement_Photovoltaique_Ajout1 = ttk.Label(tabPhotovoltaique1, text='type logement').grid(row=3, column= 0, sticky="e")
-        annee_construction_logement_Photovoltaique_Ajout1 = ttk.Label(tabPhotovoltaique1, text='annee construction logement').grid(row=4, column= 0, sticky="e")
-        code_departement_Photovoltaique_Ajout1 = ttk.Label(tabPhotovoltaique1, text='code departement').grid(row=5, column= 0, sticky="e")
-        puissance_installee_Photovoltaique_Ajout1 = ttk.Label(tabPhotovoltaique1, text='puissance installee').grid(row=6, column= 0, sticky="e")
-        types_panneaux_Photovoltaique_Ajout1 = ttk.Label(tabPhotovoltaique1, text='types panneaux').grid(row=7, column= 0, sticky="e")
-        cout_total_ht_Photovoltaique = tk.StringVar()
-        cout_induit_ht_Photovoltaique = tk.StringVar()
-        annee_Photovoltaique = tk.StringVar()
-        type_logement_Photovoltaique = tk.StringVar()
-        annee_construction_logement_Photovoltaique = tk.StringVar()
-        code_departement_Photovoltaique = tk.StringVar()
-        puissance_installee_Photovoltaique = tk.StringVar()
-        types_panneaux_Photovoltaique = tk.StringVar()
-        cout_total_ht_Photovoltaique_Ajout2 = ttk.Entry(tabPhotovoltaique1, textvariable=cout_total_ht_Photovoltaique).grid(row=0, column= 1, sticky="w")
-        cout_induit_ht_Photovoltaique_Ajout2 = ttk.Entry(tabPhotovoltaique1, textvariable=cout_induit_ht_Photovoltaique).grid(row=1, column= 1, sticky="w")
-        annee_Photovoltaique_Ajout2 = ttk.Entry(tabPhotovoltaique1, textvariable=annee_Photovoltaique).grid(row=2, column= 1, sticky="w")
-        type_logement_Photovoltaique_Ajout2 = ttk.Entry(tabPhotovoltaique1, textvariable=type_logement_Photovoltaique).grid(row=3, column= 1, sticky="w")
-        annee_construction_logement_Photovoltaique_Ajout2 = ttk.Entry(tabPhotovoltaique1, textvariable=annee_construction_logement_Photovoltaique).grid(row=4, column= 1, sticky="w")
-        code_departement_Photovoltaique_Ajout2 = ttk.Entry(tabPhotovoltaique1, textvariable=code_departement_Photovoltaique).grid(row=5, column= 1, sticky="w")
-        puissance_installee_Photovoltaique_Ajout2 = ttk.Entry(tabPhotovoltaique1, textvariable=puissance_installee_Photovoltaique).grid(row=6, column= 1, sticky="w")
-        types_panneaux_Photovoltaique_Ajout2 = ttk.Entry(tabPhotovoltaique1, textvariable=types_panneaux_Photovoltaique).grid(row=7, column= 1, sticky="w")
-        Photovoltaique.append(cout_total_ht_Photovoltaique)
-        Photovoltaique.append(cout_induit_ht_Photovoltaique)
-        Photovoltaique.append(annee_Photovoltaique)
-        Photovoltaique.append(type_logement_Photovoltaique)
-        Photovoltaique.append(annee_construction_logement_Photovoltaique)
-        Photovoltaique.append(code_departement_Photovoltaique)
-        Photovoltaique.append(puissance_installee_Photovoltaique)
-        Photovoltaique.append(types_panneaux_Photovoltaique)
-        ttk.Button(tabPhotovoltaique1, text='Ajouter', command=lambda: self.AjouterPhotovoltaique(Photovoltaique)).grid(row=8, columnspan=2)
+        cout_total_ht_Chauffage_Modif1 = ttk.Label(tabChauffage2, text='cout total ht').grid(row=2, column= 0, sticky="e")
+        cout_induit_ht_Chauffage_Modif1 = ttk.Label(tabChauffage2, text='cout induit ht').grid(row=3, column= 0, sticky="e")
+        annee_Chauffage_Modif1 = ttk.Label(tabChauffage2, text='annee chauffage').grid(row=4, column= 0, sticky="e")
+        type_logement_Chauffage_Modif1 = ttk.Label(tabChauffage2, text='type logement').grid(row=5, column=0, sticky="e")
+        annee_construction_logement_Chauffage_Modif1 = ttk.Label(tabChauffage2, text='annee construction logement').grid(row=6, column=0, sticky="e")
+        code_departement_Chauffage_Modif1 = ttk.Label(tabChauffage2, text='code departement').grid(row=7, column=0, sticky="e")
+        energie_avant_travaux_Chauffage_Modif1 = ttk.Label(tabChauffage2, text='energie avant travaux').grid(row=8, column=0, sticky="e")
+        energie_installee_Chauffage_Modif1 = ttk.Label(tabChauffage2, text='energie installee').grid(row=9, column=0, sticky="e")
+        generateur_Chauffage_Modif1 = ttk.Label(tabChauffage2, text='generateur chauffage').grid(row=10, column=0, sticky="e")
+        type_chaudiere_Chauffage_Modif1 = ttk.Label(tabChauffage2, text='type chaudiere').grid(row=11, column=0, sticky="e")
+        cout_total_ht_Chauffage_Modif = tk.StringVar()
+        cout_induit_ht_Chauffage_Modif = tk.StringVar()
+        annee_Chauffage_Modif = tk.StringVar()
+        type_logement_Chauffage_Modif = tk.StringVar()
+        annee_construction_logement_Chauffage_Modif = tk.StringVar()
+        code_departement_Chauffage_Modif = tk.StringVar()
+        energie_avant_travaux_Chauffage_Modif = tk.StringVar()
+        energie_installee_Chauffage_Modif = tk.StringVar()
+        generateur_Chauffage_Modif = tk.StringVar()
+        type_chaudiere_Chauffage_Modif = tk.StringVar()
+        cout_total_ht_Chauffage_Modif2 = ttk.Entry(tabChauffage2, textvariable=cout_total_ht_Chauffage_Modif).grid(row=2, column= 1, sticky="w")
+        cout_induit_ht_Chauffage_Modif2 = ttk.Entry(tabChauffage2, textvariable=cout_induit_ht_Chauffage_Modif).grid(row=3, column= 1, sticky="w")
+        annee_Chauffage_Modif2 = ttk.Entry(tabChauffage2, textvariable=annee_Chauffage_Modif).grid(row=4, column= 1, sticky="w")
+        type_logement_Chauffage_Modif2 = ttk.Entry(tabChauffage2, textvariable=type_logement_Chauffage_Modif).grid(row=5, column= 1, sticky="w")
+        annee_construction_logement_Chauffage_Modif2 = ttk.Entry(tabChauffage2, textvariable=annee_construction_logement_Chauffage_Modif).grid(row=6, column= 1, sticky="w")
+        code_departement_Chauffage_Modif2 = ttk.Entry(tabChauffage2, textvariable=code_departement_Chauffage_Modif).grid(row=7, column= 1, sticky="w")
+        energie_avant_travaux_Chauffage_Modif2 = ttk.Entry(tabChauffage2, textvariable=energie_avant_travaux_Chauffage_Modif).grid(row=8, column= 1, sticky="w")
+        energie_installee_Chauffage_Modif2 = ttk.Entry(tabChauffage2, textvariable=energie_installee_Chauffage_Modif).grid(row=9, column= 1, sticky="w")
+        generateur_Chauffage_Modif2 = ttk.Entry(tabChauffage2, textvariable=generateur_Chauffage_Modif).grid(row=10, column= 1, sticky="w")
+        type_chaudiere_Chauffage_Modif2 = ttk.Entry(tabChauffage2, textvariable=type_chaudiere_Chauffage_Modif).grid(row=11, column= 1, sticky="w")
+        Chauffage_Modif.append(cout_total_ht_Chauffage_Modif)
+        Chauffage_Modif.append(cout_induit_ht_Chauffage_Modif)
+        Chauffage_Modif.append(annee_Chauffage_Modif)
+        Chauffage_Modif.append(type_logement_Chauffage_Modif)
+        Chauffage_Modif.append(annee_construction_logement_Chauffage_Modif)
+        Chauffage_Modif.append(code_departement_Chauffage_Modif)
+        Chauffage_Modif.append(energie_avant_travaux_Chauffage_Modif)
+        Chauffage_Modif.append(energie_installee_Chauffage_Modif)
+        Chauffage_Modif.append(generateur_Chauffage_Modif)
+        Chauffage_Modif.append(type_chaudiere_Chauffage_Modif)
+        ttk.Button(tabChauffage2, text='Valider', command=lambda: self.ModifierEntryChauffage(Chauffage_Modif, Id_Chauffage_Modif_text.get())).grid(row=1, column=1, sticky="w")
+        ttk.Button(tabChauffage2, text='Modifier', command=lambda: self.ModifierChauffage(Chauffage_Modif, Id_Chauffage_Modif_text.get())).grid(row=12, columnspan=2)
+
+        Photovoltaique_Modif = []
+        Id_Photovoltaique_Modif_label = ttk.Label(tabPhotovoltaique2, text='Id Photovoltaique:').grid(row=0, column= 0, sticky="e")
+        Id_Photovoltaique_Modif_text = tk.StringVar()
+        Id_Photovoltaique_Modif = ttk.Combobox(tabPhotovoltaique2, textvariable=Id_Photovoltaique_Modif_text,values=[row[0] for row in db.data.cursor().execute("SELECT id_photovoltaique FROM Photovoltaiques ORDER BY id_photovoltaique")]).grid(row=0, column=1, sticky="w")
+ 
+        cout_total_ht_Photovoltaique_Modif1 = ttk.Label(tabPhotovoltaique2, text='cout total ht').grid(row=2, column= 0, sticky="e")
+        cout_induit_ht_Photovoltaique_Modif1 = ttk.Label(tabPhotovoltaique2, text='cout induit ht').grid(row=3, column= 0, sticky="e")
+        annee_Photovoltaique_Modif1 = ttk.Label(tabPhotovoltaique2, text='annee photovoltaique').grid(row=4, column= 0, sticky="e")
+        type_logement_Photovoltaique_Modif1 = ttk.Label(tabPhotovoltaique2, text='type logement').grid(row=5, column= 0, sticky="e")
+        annee_construction_logement_Photovoltaique_Modif1 = ttk.Label(tabPhotovoltaique2, text='annee construction logement').grid(row=6, column= 0, sticky="e")
+        code_departement_Photovoltaique_Modif1 = ttk.Label(tabPhotovoltaique2, text='code departement').grid(row=7, column= 0, sticky="e")
+        puissance_installee_Photovoltaique_Modif1 = ttk.Label(tabPhotovoltaique2, text='puissance installee').grid(row=8, column= 0, sticky="e")
+        types_panneaux_Photovoltaique_Modif1 = ttk.Label(tabPhotovoltaique2, text='types panneaux').grid(row=9, column= 0, sticky="e")
+        cout_total_ht_Photovoltaique_Modif = tk.StringVar()
+        cout_induit_ht_Photovoltaique_Modif = tk.StringVar()
+        annee_Photovoltaique_Modif = tk.StringVar()
+        type_logement_Photovoltaique_Modif = tk.StringVar()
+        annee_construction_logement_Photovoltaique_Modif = tk.StringVar()
+        code_departement_Photovoltaique_Modif = tk.StringVar()
+        puissance_installee_Photovoltaique_Modif = tk.StringVar()
+        types_panneaux_Photovoltaique_Modif = tk.StringVar()
+        cout_total_ht_Photovoltaique_Modif2 = ttk.Entry(tabPhotovoltaique2, textvariable=cout_total_ht_Photovoltaique_Modif).grid(row=2, column= 1, sticky="w")
+        cout_induit_ht_Photovoltaique_Modif2 = ttk.Entry(tabPhotovoltaique2, textvariable=cout_induit_ht_Photovoltaique_Modif).grid(row=3, column= 1, sticky="w")
+        annee_Photovoltaique_Modif2 = ttk.Entry(tabPhotovoltaique2, textvariable=annee_Photovoltaique_Modif).grid(row=4, column= 1, sticky="w")
+        type_logement_Photovoltaique_Modif2 = ttk.Entry(tabPhotovoltaique2, textvariable=type_logement_Photovoltaique_Modif).grid(row=5, column= 1, sticky="w")
+        annee_construction_logement_Photovoltaique_Modif2 = ttk.Entry(tabPhotovoltaique2, textvariable=annee_construction_logement_Photovoltaique_Modif).grid(row=6, column= 1, sticky="w")
+        code_departement_Photovoltaique_Modif2 = ttk.Entry(tabPhotovoltaique2, textvariable=code_departement_Photovoltaique_Modif).grid(row=7, column= 1, sticky="w")
+        puissance_installee_Photovoltaique_Modif2 = ttk.Entry(tabPhotovoltaique2, textvariable=puissance_installee_Photovoltaique_Modif).grid(row=8, column= 1, sticky="w")
+        types_panneaux_Photovoltaique_Modif2 = ttk.Entry(tabPhotovoltaique2, textvariable=types_panneaux_Photovoltaique_Modif).grid(row=9, column= 1, sticky="w")
+        Photovoltaique_Modif.append(cout_total_ht_Photovoltaique_Modif)
+        Photovoltaique_Modif.append(cout_induit_ht_Photovoltaique_Modif)
+        Photovoltaique_Modif.append(annee_Photovoltaique_Modif)
+        Photovoltaique_Modif.append(type_logement_Photovoltaique_Modif)
+        Photovoltaique_Modif.append(annee_construction_logement_Photovoltaique_Modif)
+        Photovoltaique_Modif.append(code_departement_Photovoltaique_Modif)
+        Photovoltaique_Modif.append(puissance_installee_Photovoltaique_Modif)
+        Photovoltaique_Modif.append(types_panneaux_Photovoltaique_Modif)
+        ttk.Button(tabPhotovoltaique2, text='Valider', command=lambda: self.ModifierEntryPhotovoltaique(Photovoltaique_Modif, Id_Photovoltaique_Modif_text.get())).grid(row=1, column=1, sticky="w")
+        ttk.Button(tabPhotovoltaique2, text='Modifier', command=lambda: self.ModifierPhotovoltaique(Photovoltaique_Modif, Id_Photovoltaique_Modif_text.get())).grid(row=10, columnspan=2)
 
         #On va maintenant définir les suppressions
         #Isolation
@@ -465,6 +475,68 @@ class Window(tk.Toplevel):
         try:
             cursor = db.data.cursor()
             cursor.execute("UPDATE Isolations SET cout_total_ht_isolation= ?, cout_induit_ht_isolation = ?, annee_isolation = ?, type_logement_isolation = ?, annee_construction_logement_isolation = ?, code_departement = ?, poste_isolation = ?, isolant_isolation = ?, epaisseur_isolation = ?, surface_isolation = ? WHERE id_isolation = ?", tab)
+            db.data.commit()
+        except sqlite3.Error as e:
+            tk.messagebox.showerror("Erreur", message="Erreur: " + str(e))
+
+    def ModifierEntryChauffage(self, Chauffage_Modif, id_chauffage):
+        tab = []
+        cursor = db.data.cursor()
+        result = cursor.execute("""
+            SELECT cout_total_ht_chauffage, cout_induit_ht_chauffage, annee_chauffage, type_logement_chauffage, annee_construction_logement_chauffage, code_departement, energie_avant_travaux_chauffage, energie_installee_chauffage, generateur_chauffage, type_chaudiere_chauffage
+            FROM Chauffages
+            WHERE id_chauffage = ?""", [id_chauffage])
+        i = 0
+        tab2 = []
+        for row in result:
+            tab2.append(row)
+        for e in Chauffage_Modif:
+            tab.append(e.set(tab2[0][i]))
+            i = i + 1
+        Chauffage_Modif = tab
+
+    def ModifierChauffage(self, Chauffage_Modif, id_chauffage):
+        tab = []
+        for e in Chauffage_Modif:
+            if e.get() == '' or e.get() == 'None':
+                tab.append(None)
+            else:
+                tab.append(e.get())
+        tab.append(id_chauffage)
+        try:
+            cursor = db.data.cursor()
+            cursor.execute("UPDATE Chauffages SET cout_total_ht_chauffage= ?, cout_induit_ht_chauffage = ?, annee_chauffage = ?, type_logement_chauffage = ?, annee_construction_logement_chauffage = ?, code_departement = ?, energie_avant_travaux_chauffage = ?, energie_installee_chauffage = ?, generateur_chauffage = ?, type_chaudiere_chauffage = ? WHERE id_chauffage = ?", tab)
+            db.data.commit()
+        except sqlite3.Error as e:
+            tk.messagebox.showerror("Erreur", message="Erreur: " + str(e))
+
+    def ModifierEntryPhotovoltaique(self, Photovoltaique_Modif, id_photovoltaique):
+        tab = []
+        cursor = db.data.cursor()
+        result = cursor.execute("""
+            SELECT cout_total_ht_photovoltaique, cout_induit_ht_photovoltaique, annee_photovoltaique, type_logement_photovoltaique, annee_construction_logement_photovoltaique, code_departement, puissance_installee_photovoltaique, types_panneaux_photovoltaique
+            FROM Photovoltaiques
+            WHERE id_photovoltaique = ?""", [id_photovoltaique])
+        i = 0
+        tab2 = []
+        for row in result:
+            tab2.append(row)
+        for e in Photovoltaique_Modif:
+            tab.append(e.set(tab2[0][i]))
+            i = i + 1
+        Photovoltaique_Modif = tab
+
+    def ModifierPhotovoltaique(self, Photovoltaique_Modif, id_photovoltaique):
+        tab = []
+        for e in Photovoltaique_Modif:
+            if e.get() == '' or e.get() == 'None':
+                tab.append(None)
+            else:
+                tab.append(e.get())
+        tab.append(id_photovoltaique)
+        try:
+            cursor = db.data.cursor()
+            cursor.execute("UPDATE Photovoltaiques SET cout_total_ht_photovoltaique= ?, cout_induit_ht_photovoltaique = ?, annee_photovoltaique = ?, type_logement_photovoltaique = ?, annee_construction_logement_photovoltaique = ?, code_departement = ?, puissance_installee_photovoltaique = ?, types_panneaux_photovoltaique = ? WHERE id_photovoltaique = ?", tab)
             db.data.commit()
         except sqlite3.Error as e:
             tk.messagebox.showerror("Erreur", message="Erreur: " + str(e))
