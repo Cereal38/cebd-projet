@@ -4,14 +4,14 @@ CREATE TABLE Departements (
     nom_departement TEXT,
     code_region INTEGER,
     zone_climatique TEXT,
-    constraint pk_departements primary key (code_departement),
-    constraint fk_region foreign key (code_region) references Regions(code_region)
+    CONSTRAINT pk_departements PRIMARY KEY (code_departement),
+    CONSTRAINT fk_region FOREIGN KEY (code_region) REFERENCES Regions(code_region)
 );
 
 CREATE TABLE Regions (
     code_region INTEGER,
     nom_region TEXT,
-    constraint pk_regions primary key (code_region)
+    CONSTRAINT pk_regions PRIMARY KEY (code_region)
 );
 
 CREATE TABLE Mesures (
@@ -20,8 +20,8 @@ CREATE TABLE Mesures (
     temperature_min_mesure FLOAT,
     temperature_max_mesure FLOAT,
     temperature_moy_mesure FLOAT,
-    constraint pk_mesures primary key (code_departement, date_mesure),
-    constraint fk_mesures foreign key (code_departement) references Departements(code_departement)
+    CONSTRAINT pk_mesures PRIMARY KEY (code_departement, date_mesure),
+    CONSTRAINT fk_mesures FOREIGN KEY (code_departement) REFERENCES Departements(code_departement)
 );
 
 CREATE TABLE Communes (
